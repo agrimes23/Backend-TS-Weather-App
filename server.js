@@ -1,11 +1,14 @@
 const express = require('express')
 const app = express()
 const axios = require('axios')
+const cors = require('cors')
 require('dotenv').config()
 
 const PORT = 5000
 
 const APIKEY = process.env.API_KEY
+
+app.use(cors())
 
 app.get("/api/weather/:cityname", (req, res) => {
 
@@ -18,7 +21,7 @@ app.get("/api/weather/:cityname", (req, res) => {
     }
 
     axios.request(options)
-    .then(res => console.log(res.data), error => console.log(error))
+    .then(response => res.send(response.data), error => console.log(error))
     
 })
 
